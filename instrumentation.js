@@ -7,7 +7,7 @@ const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventi
 
 // Configure the OTLP HTTP exporter
 const otlpExporter = new OTLPTraceExporter({
-    url: 'http://host.docker.internal:4318/v1/traces', 
+    url: 'http://host.docker.internal:4318', 
   });
 
 const resource = new Resource({
