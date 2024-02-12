@@ -1,3 +1,4 @@
+require('./tracing');
 const express = require('express');
 
 const PORT = parseInt(process.env.PORT || '8080');
