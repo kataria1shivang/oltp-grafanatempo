@@ -1,0 +1,35 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    # volumes:
+    #   - ./grafana/provisioning:/etc/grafana/provisioning
+    networks:
+      - my_network
+
+  tempo:
+    image: grafana/tempo:latest
+    ports:
+      - "3200:3200"  
+      - "4317:4317"  
+      - "4318:4318"  
+    volumes:
+      - ./tempo/tempo-config.yaml:/etc/tempo/tempo.yaml
+      - tempo-traces:/tmp/tempo/traces
+      - tempo-wal:/tmp/tempo/wal
+    command: 
+      - '-config.file=/etc/tempo/tempo.yaml'
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  tempo-traces:
+    name: tempo-traces
+  tempo-wal:
+    name: tempo-wal
